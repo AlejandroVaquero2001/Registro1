@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" >
+<head th:fragment="head">
+<meta charset="utf-8" />
+<title>Insert title here</title>
+</head>
+<body>
+
+	<nav th:fragment="nav">
+		<th:block th:each=" lista :${datosNavegacion}">
+		<a style="text-decoration:none;" th:href="@{/acceso/}+${lista.key}">
+			<img th:src="${lista.value}" width="25" height="25"
+				th:style="${!lista.key.equals(formulario)}? 'opacity:0.4'" />
+		</a>
+		</th:block>
+	</nav>
+
+</body>
+</html>

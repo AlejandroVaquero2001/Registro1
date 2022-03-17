@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+
+<body>
+
+	
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+	
+	<form th:action="@{/datosBancarios/save}" th:object="${datosBancarios}" method="POST">
+		 <fieldset>
+	  		<legend>Datos Bancarios:</legend><br/>
+	  					
+			<div class="form-group my-4">
+				<label>Cuenta Corriente</label>
+				<input type="text" th:field="*{cuentaCorriente}" class="form-control" />
+			</div><br/>
+	
+					
+			<div class="form-group">	
+				<button type="submit" class="form-control btn btn-secondary">Grabar información e ir al resumen final</button>
+			</div>
+		</fieldset>
+	</form>
+</body>
+</html>

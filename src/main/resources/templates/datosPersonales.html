@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+
+<body>
+
+	
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+	
+	<form th:action="@{/save-datosPersonales}" th:object="${datosPersonales}" method="POST" enctype="multipart/form-data">
+		 <fieldset>
+	  		<legend>Datos personales:</legend><br/>
+	  		
+			<div class="form-group my-4">
+				<label>Nombre</label>
+				<input type="text" th:field="*{nombre}" class="form-control" />
+				
+				 &nbsp &nbsp<label>Apellidos</label>
+				<input type="text" th:field="*{apellidos}" class="form-control" />
+			</div><br/>
+			
+					
+			<div class="form-group my-4">
+				<label>Fecha de nacimiento</label>
+				<input type="date" th:field="*{fechaNacimiento}"  class="form-control"/>
+			</div><br/>
+			
+			<div class="form-group my-4">
+				<label>Genero</label>&nbsp &nbsp &nbsp &nbsp
+				<th:block th:each="generoLista: ${listaGenerosOrdenada}">
+		    			<input type="radio" th:field="*{genero}" th:id="${generoLista.value}" th:value="${generoLista.key}" th:checked="${generoLista.key == genero}"/>
+						<span th:text="${generoLista.value}"/>
+				</th:block>
+			</div><br/>
+			
+			<div class="form-group my-4">
+				<label>Casado o Soltero</label>&nbsp &nbsp &nbsp &nbsp
+				<th:block th:each="parejaSolo: ${listaParejaOrdenada}">
+		    			<input type="checkbox" th:field="*{casado}" th:id="${parejaSolo.value}" 
+		    			th:value="${parejaSolo.key}" 
+		    			th:checked="${casado != null} and ${#lists.contains(casado, parejaSolo.key)}"/>
+						<span th:text="${parejaSolo.value}"/>
+				</th:block>	
+			</div><br/>
+			
+			<div class="form-group my-4">
+				<label>Nacionalidades</label>&nbsp &nbsp &nbsp &nbsp
+				<select th:field="*{nacionalidades}" size="5" multiple="multiple">
+					 <th:block th:each="listaNacionalidad: ${listaNacionalidadesOrdenada}">
+				    	<option th:value="${listaNacionalidad.key}" th:selected="${nacionalidades != null} and ${#lists.contains(nacionalidades, mlistaNacionalidad.key)}"/>
+						<span th:text="${listaNacionalidad.value}"/>
+					 </th:block>
+				 </select>			
+			</div><br/>
+					
+			<div class="form-group">	
+				<button type="submit" class="form-control btn btn-secondary">Grabar información e ir al paso 2 - Datos profesionales</button>
+			</div>
+		</fieldset>
+	</form>
+</body>
+</html>

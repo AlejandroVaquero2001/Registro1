@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+
+<body>
+
+	
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+	
+	<form th:action="@{/datosProfesionales/save}" th:object="${datosProfesionales}" method="POST">
+		 <fieldset>
+	  		<legend>Datos profesionales:</legend><br/>
+	  		
+	  		<div class="form-group my-4">
+				<label>Departamento</label>&nbsp &nbsp &nbsp &nbsp
+				<select th:field="*{departamento}" size="5" multiple="multiple">
+					 <th:block th:each="listaDepartamento: ${listaDepertamentosOrdenada}">
+						<option th:value="${listaDepartamento.key}"
+							th:selected="${listaDepartamento.key == departamento}" />
+						<span th:text="${listaDepartamento.value}" />
+					</th:block>
+				 </select>			
+			</div><br/>
+			
+			<div class="form-group my-4">
+				<label>Salario</label>
+				<input type="text" th:field="*{salario}" class="form-control" />
+			</div><br/>
+			
+			<div class="form-group my-4">
+				<label>Comentarios</label>
+				<textarea name="comentarios" id="comentarios" cols="30" rows="4"
+					th:field="*{comentarios}"> </textarea>
+			</div><br/>
+			
+					
+			<div class="form-group">	
+				<button type="submit" class="form-control btn btn-secondary">Grabar información e ir al paso 3 - Datos bancarios</button>
+			</div>
+		</fieldset>
+	</form>
+</body>
+</html>
